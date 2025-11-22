@@ -1,20 +1,9 @@
 export interface Todo {
   id: number
   title: string
-  completed: boolean
-  priority: 'low' | 'medium' | 'high'
-  dueDate?: string
-  category?: string
-  createdAt: string
-  updatedAt: string
+  status: 'pending' | 'in-progress' | 'completed'
 }
 
-export interface Category {
-  id: number
-  name: string
-  color: string
-  icon?: string
-}
 
 export interface TodoStats {
   total: number

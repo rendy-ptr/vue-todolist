@@ -10,7 +10,6 @@ import ProgressCard from '@/components/customs/sections/ProgressCard.vue'
       <div class="col-span-2">
         <TodoListCard />
       </div>
-
       <div class="flex flex-col gap-6">
         <ClockCard />
         <ProgressCard />
