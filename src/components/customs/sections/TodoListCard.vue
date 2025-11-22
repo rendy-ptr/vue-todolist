@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { Card } from '@/components/ui/card'
 import MainCard from '../organisms/MainCard.vue'
+import { useTodos } from '@/hooks/useTodos'
+import CreateTodoModal from './CreateTodoModal.vue'
+import UpdateTodoModal from './UpdateTodoModal.vue'
 import { Button } from '@/components/ui/button'
-import { mockTodos } from '@/mocks/todo'
+import DeleteTodoModal from './DeleteTodoModal.vue'
+
+const { todos } = useTodos()
 </script>
 
 <template>
@@ -10,18 +15,30 @@ import { mockTodos } from '@/mocks/todo'
     <div class="flex justify-between">
       <div class="flex flex-col">
         <h3 class="font-semibold text-lg">Todo List App</h3>
-        <p>Total {{ mockTodos.length }} Todo</p>
+        <p>Total {{ todos.length }} Todo</p>
       </div>
-      <Button class="cursor-pointer">Add New Task</Button>
+      <CreateTodoModal />
     </div>
     <div class="mt-6 space-y-4">
       <Card
-        v-for="todo in mockTodos"
+        v-for="todo in todos"
         :key="todo.id"
-        class="p-4 border rounded-md hover:bg-accent hover:cursor-pointer"
+        class="p-4 border rounded-md hover:bg-accent transition"
       >
-        <h4 class="font-medium">{{ todo.title }}</h4>
-        <p class="text-sm text-muted-foreground">Status: {{ todo.status }}</p>
+        <div class="flex justify-between items-start">
+          <div>
+            <h4 class="font-medium">{{ todo.title }}</h4>
+            <p class="text-sm text-muted-foreground">
+              Status: <span class="font-medium">{{ todo.status }}</span>
+            </p>
+          </div>
+
+          <div class="flex gap-2">
+            <UpdateTodoModal :todo="todo" />
+
+            <DeleteTodoModal :todo="todo" />
+          </div>
+        </div>
       </Card>
     </div>
   </MainCard>

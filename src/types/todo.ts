@@ -4,7 +4,6 @@ export interface Todo {
   status: 'pending' | 'in-progress' | 'completed'
 }
 
-
 export interface TodoStats {
   total: number
   completed: number
