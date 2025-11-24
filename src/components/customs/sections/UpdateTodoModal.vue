@@ -11,12 +11,12 @@ import {
 import { Button } from '@/components/ui/button'
 import { ref } from 'vue'
 import type { Todo } from '@/types/todo'
-import { useTodos } from '../../../hooks/useTodos'
+import { useTodoStore } from '@/stores/todo.store'
 import { toast } from 'vue-sonner'
 
 const { todo } = defineProps<{ todo: Todo }>()
 
-const { updateTodo } = useTodos()
+const { updateTodo } = useTodoStore()
 
 const title = ref(todo.title)
 const status = ref<Todo['status']>(todo.status)

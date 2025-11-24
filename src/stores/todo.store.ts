@@ -1,14 +1,11 @@
+import { ref, watch } from 'vue'
+import { defineStore } from 'pinia'
 import type { Todo } from '@/types/todo'
-import { ref } from 'vue'
 
 const STORAGE_KEY = 'todos'
 
-export const useTodos = () => {
+export const useTodoStore = defineStore('todoStore', () => {
   const todos = ref<Todo[]>(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'))
-
-  const saveToLocalStorage = () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos.value))
-  }
 
   const addTodo = (title: Todo['title'], status: Todo['status']) => {
     const newTodo: Todo = {
@@ -17,12 +14,10 @@ export const useTodos = () => {
       status,
     }
     todos.value.push(newTodo)
-    saveToLocalStorage()
   }
 
   const deleteTodo = (id: Todo['id']) => {
     todos.value = todos.value.filter((todo) => todo.id !== id)
-    saveToLocalStorage()
   }
 
   const updateTodo = (id: Todo['id'], updated: Partial<Todo>) => {
@@ -33,9 +28,10 @@ export const useTodos = () => {
         ...todos.value[index],
         ...updated,
       } as Todo
-      saveToLocalStorage()
     }
   }
+
+  watch(todos, (val) => localStorage.setItem(STORAGE_KEY, JSON.stringify(val)), { deep: true })
 
   return {
     todos,
@@ -43,4 +39,4 @@ export const useTodos = () => {
     deleteTodo,
     updateTodo,
   }
-}
+})

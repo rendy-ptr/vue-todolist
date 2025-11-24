@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import MainCard from '../organisms/MainCard.vue'
 import { useProgress } from '@/hooks/useProgress'
-import { useTodos } from '@/hooks/useTodos'
-const { todos } = useTodos()
+import { useTodoStore } from '@/stores/todo.store'
+const todoStore = useTodoStore()
 const { completedCount, progressPercent } = useProgress()
 </script>
 
@@ -11,7 +11,7 @@ const { completedCount, progressPercent } = useProgress()
     <h3 class="font-semibold mb-4 text-lg">Today's Progress</h3>
 
     <p class="text-sm text-muted-foreground mb-2">
-      {{ completedCount }} / {{ todos.length }} completed
+      {{ completedCount }} / {{ todoStore.todos.length }} completed
     </p>
 
     <div class="w-full h-3 bg-gray-200 rounded-md overflow-hidden">

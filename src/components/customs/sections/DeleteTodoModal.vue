@@ -11,13 +11,13 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
-import { useTodos } from '@/hooks/useTodos'
+import { useTodoStore } from '@/stores/todo.store'
 import { toast } from 'vue-sonner'
 import type { Todo } from '@/types/todo'
 
 const { todo } = defineProps<{ todo: Todo }>()
 
-const { deleteTodo } = useTodos()
+const { deleteTodo } = useTodoStore()
 
 const handleDelete = () => {
   deleteTodo(todo.id)

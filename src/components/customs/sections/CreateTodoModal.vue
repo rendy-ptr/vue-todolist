@@ -11,10 +11,10 @@ import {
 import { Button } from '@/components/ui/button'
 import { ref } from 'vue'
 import type { Todo } from '@/types/todo'
-import { useTodos } from '../../../hooks/useTodos'
+import { useTodoStore } from '@/stores/todo.store'
 import { toast } from 'vue-sonner'
 
-const { addTodo } = useTodos()
+const { addTodo } = useTodoStore()
 
 const title = ref('')
 const status = ref<Todo['status']>('pending')

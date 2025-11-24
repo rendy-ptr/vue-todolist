@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { Card } from '@/components/ui/card'
 import MainCard from '../organisms/MainCard.vue'
-import { useTodos } from '@/hooks/useTodos'
+import { useTodoStore } from '@/stores/todo.store'
+
 import CreateTodoModal from './CreateTodoModal.vue'
 import UpdateTodoModal from './UpdateTodoModal.vue'
 import { Button } from '@/components/ui/button'
 import DeleteTodoModal from './DeleteTodoModal.vue'
 
-const { todos } = useTodos()
+const todoStore = useTodoStore()
 </script>
 
 <template>
@@ -15,13 +16,13 @@ const { todos } = useTodos()
     <div class="flex justify-between">
       <div class="flex flex-col">
         <h3 class="font-semibold text-lg">Todo List App</h3>
-        <p>Total {{ todos.length }} Todo</p>
+        <p>Total {{ todoStore.todos.length }} Todo</p>
       </div>
       <CreateTodoModal />
     </div>
     <div class="mt-6 space-y-4">
       <Card
-        v-for="todo in todos"
+        v-for="todo in todoStore.todos"
         :key="todo.id"
         class="p-4 border rounded-md hover:bg-accent transition"
       >
